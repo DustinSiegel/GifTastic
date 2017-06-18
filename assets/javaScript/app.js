@@ -16,4 +16,11 @@ function addButton() {
   }
 }
 
+$("#add-gif").on("click", function(event) {
+  event.preventDefault();
+  var gif = $("#gif-Input").val().trim();
+  gifButtons.push(gif);
+  addButton();
+})
+
 addButton();
