@@ -2,15 +2,11 @@
 var topics = ["Bouldering", "Sport Climbing", "Trad Climbing", "Skate Boarding", "Mountain Biking", "Skiing", "Cliff Jumping"];
 
 // Global Variables
-
-// var gifSelection;
-// var buttonPress;
 var url;
-// var swapData;
-// var reSwap;
-// var rightClicked;
-
-
+var clickEvent;
+var dataSwap;
+var dataRevert;
+var clicked = false;
 // Adds buttons to the array and displays all of the buttonss.
 function addButtons() {
   $(".gif-Adder").empty();
@@ -55,25 +51,42 @@ console.log(this);
   .done(function(response) {
 
     var results = response.data;
-    console.log(response);
+    console.log(results);
 
-    for (var i = 0; i < results.lenght; i++) {
-        var gifDiv = $("<div class='item'>");
-        var rating = results[i].rating;
-        var p = $("<p>").text("Rating: " + rating);
-        var subjectImage = $("<img>");
-        console.log("rating: " + results[i].rating);
+    for (var i = 0; i < 10; i++) {
 
-        subjectImage.attr("src", results[i].images.fixed_height.url);
-        gifDiv.append(p);
-        gifDiv.append(subjectImage);
-        console.log("gifDiv: " + gifDiv);
-        console.log("rating: " + results[i].rating);
-        $(".gif-display").prepend(gifDiv);
-
+        $(".gif-display").append("<div class='col-lg-12  clickEvent'><span>Rating: " + response.data[i].rating.toUpperCase() + "</span><br/><img class='clickEvent' dataSwap='" + response.data[i].images.fixed_height.url + "' dataRevert='" + response.data[i].images.fixed_height_still.url + "' src='" + response.data[i].images.fixed_height_still.url + "'>");  
       }
-    })
   })
+})
+
+// Swaps the gif off or on
+function clickAction (action) {
+  if (clicked) {
+    $(action).attr("src", $(action).attr("dataSwap"));
+cosole.log("clicked");
+  }
+  else {
+    $(action).attr("src", $(action).attr("dataRevert"));
+  }
+};
+
+    //   if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+    //     var gifDiv = $("<div class='item'>");
+    //     var rating = results[i].rating;
+    //     var p = $("<p>").text("Rating: " + rating);
+    //     var subjectImage = $("<img>");
+    //     console.log("rating: " + results[i].rating);
+
+    //     subjectImage.attr("src", results[i].images.fixed_height.url);
+    //     gifDiv.append(p);
+    //     gifDiv.append(subjectImage);
+    //     console.log(gifDiv);
+    //     console.log(results[i].rating);
+    //     $(".gif-display").prepend(gifDiv);
+    //     }
+    //   })
+    // })
 // })
 
 
