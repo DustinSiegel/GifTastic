@@ -1,5 +1,5 @@
 // Array of gif topics.
-var topics = ["Bouldering", "Sport Climbing", "Trad Climbing", "Skate Boarding", "Mountain Biking", "Skiing", "Cliff Jumping"];
+var topics = ["Bouldering", "Sport Climbing", "Trad Climbing", "Skate Boarding", "Mountain Biking", "Skiing", "Cliff Jumping",];
 
 // Global Variables
 var url;
@@ -30,7 +30,6 @@ $(".add-gif").on("click", function(event) {
 
 addButtons();
 
-
 // Searches Gify.com for whatever the button pressed and produce a url.
 
 $("button").on("click", function() {
@@ -55,39 +54,30 @@ console.log(this);
 
     for (var i = 0; i < 10; i++) {
 
-        $(".gif-display").append("<div class='col-lg-12  clickEvent'><span>Rating: " + response.data[i].rating.toUpperCase() + "</span><br/><img class='clickEvent' dataSwap='" + response.data[i].images.fixed_height.url + "' dataRevert='" + response.data[i].images.fixed_height_still.url + "' src='" + response.data[i].images.fixed_height_still.url + "'>");  
+        $(".gif-display").append("<div class='col-lg-6 col-lg-6  clickEvent'><span>Rating: " + response.data[i].rating.toUpperCase() + "</span><br/><img class='clickEvent' dataSwap='" + response.data[i].images.fixed_height.url + "'dataRevert='" + response.data[i].images.fixed_height_still.url + "' src='" + response.data[i].images.fixed_height_still.url + "'>");  
       }
+    // Sets up an action when the gif is clicked. 
+      $(".clickEvent").click(function () {
+       if (clicked) {
+           clicked = false;  
+          clickAction(this);
+        }
+        else {
+          clicked = true;
+          clickAction(this);
+        }
+      })
+      // Swaps between the on and off data responses
+      function clickAction (action) {
+        if (clicked) {
+          $(action).attr("src", $(action).attr("dataSwap"));
+        }
+        else {
+          $(action).attr("src", $(action).attr("dataRevert"));
+        }
+      };
   })
 })
-
-// Swaps the gif off or on
-function clickAction (action) {
-  if (clicked) {
-    $(action).attr("src", $(action).attr("dataSwap"));
-cosole.log("clicked");
-  }
-  else {
-    $(action).attr("src", $(action).attr("dataRevert"));
-  }
-};
-
-    //   if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-    //     var gifDiv = $("<div class='item'>");
-    //     var rating = results[i].rating;
-    //     var p = $("<p>").text("Rating: " + rating);
-    //     var subjectImage = $("<img>");
-    //     console.log("rating: " + results[i].rating);
-
-    //     subjectImage.attr("src", results[i].images.fixed_height.url);
-    //     gifDiv.append(p);
-    //     gifDiv.append(subjectImage);
-    //     console.log(gifDiv);
-    //     console.log(results[i].rating);
-    //     $(".gif-display").prepend(gifDiv);
-    //     }
-    //   })
-    // })
-// })
 
 
 
