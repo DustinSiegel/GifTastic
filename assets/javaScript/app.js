@@ -32,7 +32,7 @@ addButtons();
 
 // Searches Gify.com for whatever the button pressed and produce a url.
 
-$("button").on("click", function() {
+$(document).on("click", "button", function() {
 console.log(this);
 
   var subject = $(this).attr("data-gif");
