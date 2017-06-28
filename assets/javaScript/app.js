@@ -3,10 +3,14 @@ var topics = ["Bouldering", "Sport Climbing", "Trad Climbing", "Skate Boarding",
 
 // Global Variables
 var url;
-var clickEvent;
-var dataSwap;
+var rating;
+var dataGif;
 var dataRevert;
+var clickEvent;
 var clicked = false;
+var on;
+var off;
+
 // Adds buttons to the array and displays all of the buttonss.
 function addButtons() {
   $(".gif-Adder").empty();
@@ -34,6 +38,7 @@ addButtons();
 
 $(document).on("click", "button", function() {
 console.log(this);
+  $(".gif-display").empty();
 
   var subject = $(this).attr("data-gif");
 
@@ -54,12 +59,13 @@ console.log(this);
 
     for (var i = 0; i < 10; i++) {
 
-        $(".gif-display").append("<div class='col-lg-6 col-lg-6  clickEvent'><span>Rating: " + response.data[i].rating.toUpperCase() + "</span><br/><img class='clickEvent' dataSwap='" + response.data[i].images.fixed_height.url + "'dataRevert='" + response.data[i].images.fixed_height_still.url + "' src='" + response.data[i].images.fixed_height_still.url + "'>");  
+        $(".gif-display").append("<div class='col-lg-6 col-lg-6  class='clickEvent'><span>Rating: " + response.data[i].rating.toUpperCase() + "</span><br/><img class='clickEvent' dataGif='" + response.data[i].images.fixed_height.url + "'dataRevert='" + response.data[i].images.fixed_height_still.url + "' src='" + response.data[i].images.fixed_height_still.url + "'>");  
       }
-    // Sets up an action when the gif is clicked. 
+    
+    // Sets up an action when the gif is clicked and sets it to off. 
       $(".clickEvent").click(function () {
        if (clicked) {
-           clicked = false;  
+          clicked = false;  
           clickAction(this);
         }
         else {
@@ -67,21 +73,20 @@ console.log(this);
           clickAction(this);
         }
       })
+      
       // Swaps between the on and off data responses
-      function clickAction (action) {
+      function clickAction (set) {
         if (clicked) {
-          $(action).attr("src", $(action).attr("dataSwap"));
+          $(set).attr("src", $(set).attr("dataGif"));
+          clicked = true;
         }
         else {
-          $(action).attr("src", $(action).attr("dataRevert"));
+          $(set).attr("src", $(set).attr("dataRevert"));
+          clicked = false;
         }
       };
   })
 })
-
-
-
-
 
 
 
