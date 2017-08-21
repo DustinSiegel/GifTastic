@@ -37,7 +37,7 @@ addButtons();
 // Searches Gify.com for whatever the button pressed and produce a url.
 
 $(document).on("click", "button", function() {
-console.log(this);
+  console.log(this);
   
   $(".gif-display").empty();
 
