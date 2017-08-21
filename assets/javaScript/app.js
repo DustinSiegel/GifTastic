@@ -38,6 +38,7 @@ addButtons();
 
 $(document).on("click", "button", function() {
 console.log(this);
+  
   $(".gif-display").empty();
 
   var subject = $(this).attr("data-gif");
